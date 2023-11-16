@@ -8,7 +8,7 @@ export const $api = () => {
     });
 
     instance.defaults.headers['Accept'] = 'application/json';
-    instance.defaults.headers['Authorization'] = 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwYzk3ZDBkYTBiODA2OTU1OGMyNmQwNjVkZmE1YzJiZSIsInN1YiI6IjY0YWY5ZGE0OGEwZTliMDExZDhlMjg3MiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.x0zykKfoB5-nxPCq9sdey5IYOJBC5zi8wsxHE7nvaKg';
+    instance.defaults.headers['Authorization'] = 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhOWVmNDZiYmEzYzBlMThhMGYwNTFkNjdmMjA2YjEyZCIsInN1YiI6IjY0YWY5ZGE0OGEwZTliMDExZDhlMjg3MiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.buQ2a81tQAk_2BmQFyYfAmCZHhxr9icsKojvzYxNzLA';
 
     instance.interceptors.response.use(response => {
         if (typeof document !== 'undefined') NProgress.done();
