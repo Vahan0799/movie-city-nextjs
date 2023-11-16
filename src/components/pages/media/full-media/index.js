@@ -1,5 +1,6 @@
 import React, {useEffect} from 'react';
 import classNames from 'classnames';
+import {MEDIA_API} from '@/constants';
 import styles from './index.module.scss';
 
 const Index = props => {
@@ -22,16 +23,14 @@ const Index = props => {
 				token: '{token}'
 			}
 		},
-	}
+	};
 
 	useEffect(() => {
-		const initializeKinobox = () => {
-			new Kinobox('.media_player', mediaPlayerOptions).init();
-		};
+		const initializeKinobox = () => new Kinobox('.media_player', mediaPlayerOptions).init()
 
 		const loadKinoboxScript = () => {
 			const script = document.createElement('script');
-			script.src = process.env.MEDIA_API;
+			script.src = MEDIA_API;
 			script.async = true;
 			script.onload = initializeKinobox;
 			document.body.appendChild(script);
@@ -43,7 +42,7 @@ const Index = props => {
 
 	return (
 		<section className={classNames([styles.clipContainer, 'movie-list-info-wrapper'])}>
-			<div className="media_player"></div>
+			<div className="media_player"/>
 		</section>
 	)
 }

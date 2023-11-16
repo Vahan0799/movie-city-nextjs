@@ -20,7 +20,6 @@ const Index = () => {
 		}
 	},[]);
 
-
 	return (
 		<footer className={classNames([styles.footer, 'fixed-background'])}
 				style={popularMovie.backdrop_path && dynamicBackground(popularMovie.backdrop_path)}

@@ -92,7 +92,7 @@
 
                 &::before, &::after {
                     @apply content-[''] bg-color-linear w-[12px] h-[1px]
-                    absolute top-[50%] translate-y-[-50%] right-0
+                    absolute top-1/2 -translate-y-2/4 right-0
                 }
 
                 &::after {

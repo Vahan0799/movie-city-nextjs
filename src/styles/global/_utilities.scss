@@ -21,7 +21,7 @@
     &-nav {
         &-prev, &-next {
             @apply w-[35px] h-[35px] bg-primary-blue lg:w-[40px] lg:h-[40px] rounded-full
-            transition-all absolute top-[47%] translate-y-[-50%] z-[2]
+            transition-all absolute top-[47%] -translate-y-2/4 z-[2]
             hover:bg-secondary-blue;
 
             span {
