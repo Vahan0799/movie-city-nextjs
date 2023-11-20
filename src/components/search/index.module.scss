@@ -28,20 +28,20 @@
     }
 
     &SmartResults {
-        @apply max-h-[420px] absolute top-[40px] left-0 w-full
-        bg-color-linear rounded-[10px] overflow-hidden p-2 z-[1];
+        @apply h-fit absolute top-[40px] left-0 w-full text-[14px]
+        bg-primary-gray rounded-[10px] overflow-hidden p-2 z-[1];
 
-        li {
-            @apply [&:not(:last-child)]:mb-2 text-[14px];
+        ul {
+            @apply border-b-[1px] border-solid border-black-white pb-2 mb-2 overflow-hidden h-fit;
 
-            &:nth-last-of-type(2) {
-                @apply border-b-[1px] border-solid pb-2;
+            li {
+                @apply [&:not(:last-child)]:mb-2 h-fit;
             }
         }
     }
 
     &Result {
-        @apply flex overflow-hidden;
+        @apply flex;
     }
 
     &Response {
