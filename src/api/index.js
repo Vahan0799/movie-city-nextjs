@@ -1,14 +1,14 @@
 import axios from 'axios';
 import NProgress from 'nprogress';
-import {BASE_URL} from '@/constants';
+import {API_URL, API_TOKEN} from '@/constants';
 
 export const $api = () => {
     const instance = axios.create({
-        baseURL: BASE_URL
+        baseURL: API_URL
     });
 
     instance.defaults.headers['Accept'] = 'application/json';
-    instance.defaults.headers['Authorization'] = 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhOWVmNDZiYmEzYzBlMThhMGYwNTFkNjdmMjA2YjEyZCIsInN1YiI6IjY0YWY5ZGE0OGEwZTliMDExZDhlMjg3MiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.buQ2a81tQAk_2BmQFyYfAmCZHhxr9icsKojvzYxNzLA';
+    instance.defaults.headers['Authorization'] = `Bearer ${API_TOKEN}`;
 
     instance.interceptors.response.use(response => {
         if (typeof document !== 'undefined') NProgress.done();
