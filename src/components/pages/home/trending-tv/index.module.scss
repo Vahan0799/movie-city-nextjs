@@ -25,7 +25,7 @@
 
             &::after {
                 @apply content-[''] absolute inset-0 bg-primary-gray h-full w-full z-[-1]
-                translate-y-[100%] transition-transform duration-300;
+                translate-y-full transition-transform duration-300;
             }
         }
     }

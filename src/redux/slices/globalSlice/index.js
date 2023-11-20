@@ -4,7 +4,11 @@ export const index = createSlice({
     name: 'GLOBAL',
     initialState: {
         popularMovies: [],
-        searchResults: [],
+        search: {
+            results: null,
+            query: ''
+        },
+        searchPageResults: [],
         popularMovie: {},
     },
 
@@ -13,8 +17,12 @@ export const index = createSlice({
             state.popularMovies = action.payload;
         },
 
-        setSearchResults: (state, action) => {
-            state.searchResults = action.payload;
+        setSearchResults: (state, {payload}) => {
+            state.search = payload;
+        },
+
+        setSearchPageResults: (state, action) => {
+            state.searchPageResults = action.payload;
         },
 
         setPopularMovieOfDay: (state, action) => {
@@ -26,6 +34,7 @@ export const index = createSlice({
 export const {
     setPopularMovies,
     setSearchResults,
+    setSearchPageResults,
     setPopularMovieOfDay
 } = index.actions;
 

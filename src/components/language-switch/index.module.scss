@@ -1,7 +1,8 @@
 .languageSwitch {
     &Container {
         @apply flex items-center gap-2 relative rounded-[30px] overflow-hidden
-        border-solid border-secondary-blue border-[1px];
+        border-solid border-secondary-blue border-[1px]
+        max-lg:absolute max-lg:left-[90px] max-lg:top-[30px];
     }
 
     &Item {

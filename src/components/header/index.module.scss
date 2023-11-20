@@ -8,7 +8,7 @@
     }
 
     &Down {
-        @apply lg:translate-y-[-100%];
+        @apply lg:-translate-y-full;
     }
 
     &Inner {
@@ -34,21 +34,7 @@
 
     &Items {
         @apply flex items-start gap-5 flex-col pt-14 w-full
-        lg:flex-row lg:items-center lg:pt-0 lg:w-[unset];
-
-        form {
-            button {
-                @apply [&:not(:hover)]:bg-primary-blue #{!important};
-            }
-
-            input {
-                @apply text-black-white lg:text-white;
-
-                &::placeholder {
-                    @apply text-black-white lg:text-white #{!important};
-                }
-            }
-        }
+        lg:flex-row lg:items-center lg:pt-0 lg:w-4/5;
     }
 
     &Container {
@@ -76,7 +62,7 @@
     }
 
     &Toggler {
-        @apply w-[30px] h-[30px] absolute top-[50%] right-[15px] lg:hidden;
+        @apply w-[30px] h-[30px] absolute top-1/2 right-[15px] lg:hidden;
         animation: wiggle 550ms linear infinite both;
     }
 

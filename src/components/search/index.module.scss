@@ -1,0 +1,50 @@
+.search {
+    @apply w-full lg:w-2/5;
+
+    &Form {
+        @apply flex items-center h-[fit-content] gap-4 max-lg:relative;
+
+        a button {
+            @apply [&:not(:hover)]:bg-primary-blue #{!important};
+        }
+
+        input {
+            @apply text-black-white w-full lg:text-white;
+
+            &::placeholder {
+                @apply text-black-white lg:text-white #{!important};
+            }
+        }
+    }
+
+    &Container {
+        @apply w-full lg:relative;
+    }
+
+    &Clean {
+        @apply w-[15px] h-[15px] absolute lg:right-[15px] top-2/4 -translate-y-2/4 bg-contain p-2
+        max-lg:left-[calc(100%-108px)];
+        background-image: url('data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 50 50\' width=\'50px\' height=\'50px\'%3E%3Cpath fill=\'%23fff\' d=\'M 9.15625 6.3125 L 6.3125 9.15625 L 22.15625 25 L 6.21875 40.96875 L 9.03125 43.78125 L 25 27.84375 L 40.9375 43.78125 L 43.78125 40.9375 L 27.84375 25 L 43.6875 9.15625 L 40.84375 6.3125 L 25 22.15625 Z\'/%3E%3C/svg%3E');
+    }
+
+    &SmartResults {
+        @apply max-h-[420px] absolute top-[40px] left-0 w-full
+        bg-color-linear rounded-[10px] overflow-hidden p-2 z-[1];
+
+        li {
+            @apply [&:not(:last-child)]:mb-2 text-[14px];
+
+            &:nth-last-of-type(2) {
+                @apply border-b-[1px] border-solid pb-2;
+            }
+        }
+    }
+
+    &Result {
+        @apply flex overflow-hidden;
+    }
+
+    &Response {
+        @apply text-center p-1;
+    }
+}

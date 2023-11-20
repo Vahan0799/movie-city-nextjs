@@ -16,8 +16,6 @@ const Index = props => {
 		slidesPerView: 1.2,
 		slidesPerGroup: 1,
 		speed: 800,
-		loop: true,
-		loopedSlides: 10,
 		pagination: {
 			type: 'progressbar',
 			el: '.clip-pagination',

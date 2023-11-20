@@ -5,7 +5,7 @@ import {useTranslation} from 'next-i18next';
 import {serverSideTranslations} from 'next-i18next/serverSideTranslations';
 import Default from '@/layouts/Default';
 import {getSearchResults} from '@/services/global';
-import {setSearchResults} from '@/redux/slices/globalSlice';
+import {setSearchPageResults} from '@/redux/slices/globalSlice';
 import {dispatch, filterFetchResults} from '@/helpers';
 import MediaCard from '@/components/media-card';
 import Pagination from '@/components/pagination';
@@ -15,7 +15,7 @@ const Index = () => {
 	const [isEmpty, setEmpty] = useState(false);
 	const [currentPage, setCurrentPage] = useState(1);
 	const [totalPages, setTotalPages] = useState(1);
-	const {searchResults} = useSelector(state => state.global);
+	const {searchPageResults} = useSelector(state => state.global);
 	const keyword = router.query;
 	const locale = router.locale;
 
@@ -23,16 +23,16 @@ const Index = () => {
 
 	useEffect(() => {
 		if (keyword) {
-			getSearchResults(keyword, locale, currentPage)
+			getSearchResults(keyword.query, locale, currentPage)
 				.then(response => {
 					const filtered = response.results.filter((item) => filterFetchResults(item));
 					const sortedByPopularity = filtered.sort((a, b) => b.vote_average - a.vote_average)
-					dispatch(setSearchResults(sortedByPopularity))
+					dispatch(setSearchPageResults(sortedByPopularity))
 					setEmpty(response.results.length === 0)
 					setTotalPages(response.total_pages)
 				})
 
-			return () => dispatch(setSearchResults([]));
+			return () => dispatch(setSearchPageResults([]));
 		}
 	},[keyword, locale, currentPage]);
 
@@ -43,7 +43,7 @@ const Index = () => {
 	return (
 		<Default title={t('searchResults')}>
 			<section className={`min-h-[70vh] min-h-[70dvh] grid${!isEmpty ? ' grid-cols-2 lg:grid-cols-3' : ''}`}>
-				{searchResults.map(((media, key) =>
+				{searchPageResults.map(((media, key) =>
 					<MediaCard
 						detailed
 						mediaType={media.media_type}

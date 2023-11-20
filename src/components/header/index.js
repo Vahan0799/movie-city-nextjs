@@ -1,35 +1,35 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import {useSelector} from 'react-redux';
 import {useTranslation} from 'next-i18next';
+import {useRouter} from 'next/router';
 import classNames from 'classnames';
 import {motion} from 'framer-motion';
 import {useCurrentLocale, usePreviousLocale} from '@/hooks/useLocale';
 import useScrollDirection from '@/hooks/useScrollDirection';
-import useClickOutSide from '@/hooks/useClickOutSide';
 import NextLink from '@/components/UI/NextLink';
-import Input from '@/components/UI/Input';
 import Button from '@/components/UI/Button';
 import LanguageSwitch from '@/components/language-switch';
+import Search from '@/components/search';
 import ThemeSwitch from '@/components/theme-switch';
 import {getMovieGenres, getTvGenres} from '@/services/genre';
 import {setMovieGenres, setTvGenres} from '@/redux/slices/genreSlice';
 import {dispatch} from '@/helpers';
 import styles from './index.module.scss';
+import {setSearchResults} from '@/redux/slices/globalSlice';
 
 const Index = () => {
     const [navOpen, setNavOpen] = useState(false);
     const [showMovieGenres, setShowMovieGenres] = useState(false);
     const [showTvGenres, setShowTvGenres] = useState(false);
-    const [searchQuery, setSearchQuery] = useState('');
-    const mobileMenuTrigger = useRef(null);
-    const mobileMenuContainer = useRef(null);
 
     const {isDown} = useScrollDirection();
     const locale = useCurrentLocale();
     const prevLocale = usePreviousLocale(locale);
     const {t} = useTranslation();
+    const router = useRouter();
 
-    const {movieGenreList, tvGenreList} = useSelector(state => state.genre);
+    const {movieGenreList, tvGenreList} = useSelector(({genre}) => genre);
+    const {search} = useSelector(({global}) => global);
 
     const slideRightVariants = {
         toIn: {
@@ -49,9 +49,11 @@ const Index = () => {
         setNavOpen(false);
         setShowTvGenres(false);
         setShowMovieGenres(false);
+        dispatch(setSearchResults({
+            results: null,
+            query: ''
+        }));
     };
-
-    const handleSearchQuery = e => setSearchQuery(e.target.value);
 
     const toggleMovieGenreDropdown = () => {
         setShowTvGenres(false);
@@ -62,10 +64,6 @@ const Index = () => {
         setShowMovieGenres(false);
         setShowTvGenres(!showTvGenres)
     };
-
-    const isSearchQueryEmpty = searchQuery.trim().length === 0;
-
-    useClickOutSide(mobileMenuContainer, closeMobileMenu, mobileMenuTrigger);
 
     useEffect(() => {
         if ((movieGenreList.length === 0 && tvGenreList.length === 0) || prevLocale !== locale) {
@@ -79,7 +77,7 @@ const Index = () => {
     }, [movieGenreList, tvGenreList, locale]);
 
     return (
-        <header className={classNames([styles.header, (isDown && (!showMovieGenres && !showTvGenres)) ? styles.headerDown : ''])}>
+        <header className={classNames([styles.header, (isDown && (!showMovieGenres && !showTvGenres && !search.results)) ? styles.headerDown : ''])}>
             <div className={classNames(styles.headerInner, 'main-container')}>
                 <nav className={styles.nav}>
                     <NextLink href="/" className="max-w-[55px] lg:max-w-[120px]">
@@ -97,38 +95,10 @@ const Index = () => {
                         </motion.svg>
                     </NextLink>
                     <div className={classNames([styles.navInner, navOpen && styles.navOpen])}>
-                        <div className={styles.navContainer} ref={mobileMenuContainer}>
+                        <div className={styles.navContainer}>
                             <div className={styles.navItems}>
                                 <LanguageSwitch/>
-                                <form
-                                    autoComplete="off"
-                                    className="flex items-center h-[fit-content] gap-4"
-                                    onSubmit={e => {e.preventDefault(); return false;}}
-                                >
-                                    <Input
-                                        debounce
-                                        debounceTimeout={500}
-                                        minLength={2}
-                                        id="search"
-                                        placeholder={`${t('global.search')}...`}
-                                        value={searchQuery}
-                                        onChange={handleSearchQuery}
-                                    />
-                                    <NextLink
-                                        href={{
-                                            pathname: '/search',
-                                            query: { query: searchQuery },
-                                        }}
-                                        className={isSearchQueryEmpty ? 'disabled' : ''}
-                                    >
-                                        <Button
-                                            design="primary"
-                                            type={isSearchQueryEmpty ? 'button' : 'submit'}
-                                        >
-                                            {t('global.search')}
-                                        </Button>
-                                    </NextLink>
-                                </form>
+                                <Search/>
                                 <ul className={styles.navList}>
                                     <li className={classNames([
                                         styles.navListItem,
@@ -181,11 +151,7 @@ const Index = () => {
                                         </div>
                                     </li>
                                 </ul>
-                                <Button
-                                    regular
-                                    className={styles.navClose}
-                                    onClick={closeMobileMenu}
-                                >
+                                <Button regular className={styles.navClose} onClick={closeMobileMenu}>
                                     <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path opacity="0.5" d="M20.0002 36.6667C12.1434 36.6667 8.21505 36.6667 5.77428 34.2259C3.3335 31.7852 3.3335 27.8567 3.3335 20C3.3335 12.1433 3.3335 8.21492 5.77428 5.77416C8.21505 3.33337 12.1434 3.33337 20.0002 3.33337C27.8568 3.33337 31.7853 3.33337 34.226 5.77416C36.6668 8.21492 36.6668 12.1433 36.6668 20C36.6668 27.8567 36.6668 31.7852 34.226 34.2259C31.7853 36.6667 27.8568 36.6667 20.0002 36.6667Z" fill="rgb(var(--color-primary-blue))"/>
                                         <path d="M14.9496 14.9495C15.4378 14.4613 16.2292 14.4613 16.7173 14.9495L20.0002 18.2324L23.283 14.9495C23.7712 14.4614 24.5625 14.4614 25.0507 14.9495C25.5388 15.4377 25.5388 16.2291 25.0507 16.7172L21.768 20L25.0507 23.2829C25.5388 23.7709 25.5388 24.5624 25.0507 25.0505C24.5625 25.5387 23.771 25.5387 23.2828 25.0505L20.0002 21.7679L16.7175 25.0505C16.2293 25.5387 15.4378 25.5387 14.9496 25.0505C14.4615 24.5624 14.4615 23.771 14.9496 23.2829L18.2325 20L14.9496 16.7172C14.4615 16.2291 14.4615 15.4376 14.9496 14.9495Z" fill="rgb(var(--color-primary-blue))"/>
@@ -196,11 +162,7 @@ const Index = () => {
                         </div>
                     </div>
                 </nav>
-                <button
-                    className={styles.navToggler}
-                    onClick={openMobileMenu}
-                    ref={mobileMenuTrigger}
-                >
+                <button className={styles.navToggler} onClick={openMobileMenu}>
                     <svg width="30" height="30" viewBox="0 0 30 30" fill="rgb(var(--color-primary-blue))" xmlns="http://www.w3.org/2000/svg">
                         <path d="M24.9123 4.2859C24.9228 4.1935 24.928 4.10021 24.928 4.00635C24.928 2.64404 23.8197 1.53574 22.4574 1.53574C22.0561 1.53574 21.6696 1.63061 21.3234 1.80984C20.7649 0.945176 19.7968 0.400312 18.7344 0.400312C18.0656 0.400312 17.431 0.612422 16.9084 0.998789C16.4504 0.386074 15.719 0 14.9263 0C14.1642 0 13.4558 0.355547 12.9942 0.931992C12.4887 0.588867 11.8868 0.400254 11.2648 0.400254C10.2027 0.400254 9.23477 0.945293 8.67637 1.81002C8.3299 1.63072 7.94348 1.53568 7.54252 1.53568C6.18021 1.53568 5.07186 2.64398 5.07186 4.00629C5.07186 4.10021 5.07701 4.1935 5.08744 4.28572C3.81842 4.6749 2.9248 5.84461 2.9248 7.22883C2.9248 7.92123 3.15637 8.58656 3.58012 9.12732L6.09988 29.5003C6.13522 29.7857 6.37762 30 6.6652 30H23.3342C23.6218 30 23.8643 29.7857 23.8996 29.5003L26.4193 9.12727C26.8434 8.58674 27.0752 7.92152 27.0752 7.22883C27.0752 5.84479 26.1815 4.67514 24.9123 4.2859ZM7.16869 28.8608L4.77332 9.49365H7.39621L8.95586 28.8608H7.16869ZM10.0988 28.8608L8.53914 9.49365H11.789L11.9743 15.6224C10.9683 16.4799 10.3286 17.7548 10.3286 19.1771C10.3286 20.701 11.0622 22.0566 12.1947 22.9097L12.3743 28.8607H10.0988V28.8608ZM16.4851 28.8608H13.5142L13.3538 23.548C13.8661 23.7415 14.4205 23.8483 14.9997 23.8483C15.5791 23.8483 16.1337 23.7415 16.646 23.5478L16.4851 28.8608ZM14.9997 22.7091C13.0523 22.7091 11.4679 21.1247 11.4679 19.1772C11.4679 17.2297 13.0523 15.6454 14.9997 15.6454C16.9472 15.6454 18.5316 17.2297 18.5316 19.1772C18.5316 21.1247 16.9472 22.7091 14.9997 22.7091ZM12.9289 9.49365H17.0712L16.9073 14.9149C16.3243 14.6531 15.6791 14.5061 14.9998 14.5061C14.3206 14.5061 13.6755 14.653 13.0927 14.9148L12.9289 9.49365ZM17.6248 28.8608L17.805 22.9095C18.9374 22.0563 19.6709 20.7009 19.6709 19.1772C19.6709 17.7551 19.0313 16.4803 18.0257 15.6229L18.2109 9.49365H21.4603L19.9006 28.8608H17.6248ZM22.8307 28.8608H21.0435L22.6032 9.49365H25.2262L22.8307 28.8608ZM25.574 8.35441H4.42562C4.19207 8.02699 4.06404 7.6357 4.06404 7.22883C4.06404 6.33645 4.65303 5.5858 5.48154 5.35834C5.78248 5.78883 6.32131 6.24246 7.11355 6.24246C7.19629 6.24246 7.28172 6.23754 7.36996 6.22711C7.66797 6.19189 7.90721 5.94404 7.89865 5.64404C7.88875 5.30021 7.586 5.04926 7.25383 5.0935C6.61469 5.17893 6.35951 4.63482 6.3141 4.52238C6.31334 4.52051 6.3124 4.51875 6.31164 4.51682C6.31094 4.51523 6.31064 4.51348 6.30994 4.51189C6.2643 4.40057 6.23436 4.28426 6.22029 4.16473C6.1327 3.41748 6.69789 2.72936 7.44848 2.67803C7.83637 2.65154 8.20609 2.78982 8.48008 3.06082C8.58666 3.16623 8.72904 3.23244 8.87887 3.23467C9.13211 3.23842 9.34967 3.07928 9.42842 2.85006C9.69783 2.06613 10.4358 1.53937 11.2646 1.53937C11.8173 1.53937 12.3447 1.7758 12.7122 2.1883C12.8136 2.30197 12.9567 2.37445 13.1089 2.38248C13.3651 2.39602 13.5907 2.24115 13.6758 2.01088C13.8682 1.48957 14.3708 1.13924 14.9262 1.13924C15.5091 1.13924 16.0306 1.5266 16.2002 2.08336C16.2497 2.24561 16.3577 2.38729 16.5121 2.45766C16.7603 2.57068 17.042 2.49527 17.2015 2.29055C17.5732 1.8133 18.1319 1.53955 18.7345 1.53955C19.468 1.53955 20.1296 1.95205 20.4593 2.58961C20.3544 2.75602 20.2385 2.98107 20.1641 3.25084C19.9495 4.03025 20.1842 4.81242 20.8251 5.45338C20.9363 5.56465 21.0821 5.62025 21.2279 5.62025C21.3711 5.62025 21.5143 5.56658 21.6248 5.45918C21.8538 5.23664 21.8345 4.85707 21.6115 4.62844C21.2821 4.2907 21.1652 3.94916 21.2543 3.58488C21.2639 3.54545 21.2755 3.50748 21.2884 3.47127C21.3973 3.16453 21.631 2.91252 21.9297 2.78332C22.1363 2.69402 22.3656 2.65787 22.6008 2.6823C23.271 2.75197 23.7897 3.33428 23.7889 4.00799C23.7886 4.18078 23.7555 4.34953 23.6903 4.50949C23.6392 4.63482 23.6326 4.7765 23.6751 4.90506C23.7481 5.12613 23.9435 5.27566 24.1669 5.29529C25.159 5.38225 25.9361 6.2315 25.9361 7.22889C25.936 7.63594 25.8078 8.02723 25.574 8.35441Z" fill="rgb(var(--color-primary-blue))"/>
                         <path d="M15.308 3.65281C14.8695 3.65281 14.4503 3.76977 14.0848 3.9892C13.7068 3.65258 13.2126 3.45758 12.6961 3.45758C11.5443 3.45758 10.6074 4.39449 10.6074 5.54621C10.6074 6.69793 11.5443 7.63485 12.6959 7.63485C13.0105 7.63485 13.2655 7.37979 13.2655 7.06526C13.2655 6.75067 13.0105 6.49567 12.6959 6.49567C12.1724 6.49567 11.7465 6.06981 11.7465 5.54627C11.7465 5.02274 12.1724 4.59688 12.6959 4.59688C13.0342 4.59688 13.3397 4.77207 13.513 5.06557C13.6034 5.21862 13.7601 5.32069 13.9366 5.34155C14.1133 5.36252 14.2893 5.29971 14.4129 5.17203C14.65 4.92699 14.9679 4.79211 15.308 4.79211C15.995 4.79211 16.5539 5.35104 16.5539 6.03817C16.5539 6.35276 16.8089 6.60782 17.1235 6.60782C17.4382 6.60782 17.6931 6.35276 17.6931 6.03817C17.6932 4.72285 16.6232 3.65281 15.308 3.65281Z" fill="rgb(var(--color-primary-blue))"/>
