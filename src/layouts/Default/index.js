@@ -7,7 +7,7 @@ import Footer from '@/components/footer';
 import NextLink from '@/components/UI/NextLink';
 import PopularMovies from '@/components/popular-movies';
 import TopMovies from '@/components/top-movies';
-import MediaClip from '@/components/pages/media/media-clip';
+import MediaClip from '@/components/media-clip';
 import {dynamicBackground} from '@/helpers';
 import {lowercaseString, truncateText} from '@/helpers/stringHelpers';
 import styles from './index.module.scss';

@@ -54,8 +54,6 @@ const Index = ({totalPages, currentPage, onPageChange}) => {
 				for (let i = currentPageIdx - siblingCount; i <= currentPageIdx + siblingCount; i++) {
 					pageNumbersToShow.push(i + 1);
 				}
-
-				// pageNumbersToShow.push(DOTS, totalPages);
 			}
 		}
 

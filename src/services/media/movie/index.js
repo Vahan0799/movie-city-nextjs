@@ -101,7 +101,6 @@ export const fetchMovieData = async (id, locale) => {
 			clipList
 		] = await Promise.all(promises);
 
-		// Set clip to null if not available
 		const movieWithDefaultClip = {
 			info,
 			clip: clip || null,

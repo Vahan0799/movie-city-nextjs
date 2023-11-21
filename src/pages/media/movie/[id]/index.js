@@ -3,7 +3,7 @@ import {serverSideTranslations} from 'next-i18next/serverSideTranslations';
 import Default from '@/layouts/Default';
 import Media from '@/components/pages/media';
 import FullMovie from '@/components/pages/media/full-media';
-import ClipCard from '@/components/pages/media/clip-card';
+import ClipCard from '@/components/pages/media/clip-list';
 import SliderList from '@/components/slider-list';
 import Reviews from '@/components/pages/media/reviews';
 import Loader from '@/components/loader';

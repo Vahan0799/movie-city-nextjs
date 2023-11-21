@@ -5,7 +5,6 @@ import {persistReducer} from 'redux-persist';
 import globalSlice from '@/redux/slices/globalSlice';
 import homeSlice from '@/redux/slices/homeSlice';
 import movieSlice from '@/redux/slices/movieSlice';
-import castSlice from '@/redux/slices/movieSlice/castSlice';
 import persistSlice from '@/redux/slices/persistSlice';
 import genreSlice from '@/redux/slices/genreSlice';
 
@@ -20,7 +19,6 @@ const combinedReducers = combineReducers({
     global: globalSlice,
     home: homeSlice,
     movie: movieSlice,
-    cast: castSlice,
     persist: persistSlice,
     genre: genreSlice,
 });
@@ -31,6 +29,6 @@ export default configureStore({
     reducer: persistedReducer,
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({
         immutableCheck: false,
-        serializableCheck: false,
+        serializableCheck: false
     })
 });
