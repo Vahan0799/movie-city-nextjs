@@ -1,6 +1,7 @@
 {
   "global": {
     "search": "Search",
+    "search_results": "All Results",
     "genre": "Genre",
     "genres": "Genres",
     "genres_movies": "Genres",

@@ -33,13 +33,7 @@ const Index = () => {
                     const filtered = response.results.filter(item => filterFetchResults(item));
 
                     const sortedResults = filtered.sort((a, b) => {
-                        if (a.title && !b.title) {
-                            return -1;
-                        } else if (!a.title && b.title) {
-                            return 1;
-                        } else {
-                            return b.vote_average - a.vote_average;
-                        }
+                        return b.vote_average - a.vote_average;
                     });
 
                     setSearchResults(sortedResults.slice(0, 4))
@@ -147,7 +141,7 @@ const Index = () => {
                                             query: {query: searchQuery},
                                         }}
                                     >
-                                        All Results
+                                        {t('search_results')}
                                     </NextLink>}
                                     {isEmpty && <p>{t('noResults')}</p>}
                                 </p>

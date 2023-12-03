@@ -1,6 +1,7 @@
 {
   "global": {
     "search": "Поиск",
+    "search_results": "Все результаты",
     "genre": "Жанр",
     "genres": "Жанры",
     "genres_movies": "Филмьмы",
