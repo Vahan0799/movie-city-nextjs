@@ -40,12 +40,12 @@ const Index = props => {
 
 	return (
 		<section className="slider-info-wrapper">
-			<div className={styles.clipCard}>
+			<div className={styles.clipList}>
 				<Swiper {...swiperOptions}>
 					{items.length > 0 && items.map((clip, key) => {
 						return (
 							<SwiperSlide key={`movie-clip-${key}`}>
-								<div className={styles.clipCardItem}>
+								<div className={styles.clipListItem}>
 									<NextImage
 										onClick={() => triggerClip(clip.key)}
 										src={CLIP_THUMBNAIL(clip.key)}

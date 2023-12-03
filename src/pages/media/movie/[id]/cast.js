@@ -1,42 +1,14 @@
-import React, {useEffect} from 'react';
-// import {useRouter} from 'next/router';
-// import {useSelector} from 'react-redux';
+import React from 'react';
 import {serverSideTranslations} from 'next-i18next/serverSideTranslations';
 import {useTranslation} from 'next-i18next';
 import Empty from '@/layouts/Empty';
 import Cast from '@/components/pages/cast';
 import MovieLabel from '@/components/pages/cast/media-label';
-// import {dispatch} from '@/helpers';
 import {fetchCastData} from '@/services/media/movie/cast';
-// import {storeCredits} from '@/redux/slices/movieSlice/castSlice';
 
 const CastPage = ({ cast, crew, movieData }) => {
 
 	const {t} = useTranslation();
-
-	// useEffect(() => {
-	// 	if (query) {
-	// 		const fetchData = async () => {
-	// 			try {
-	// 				const data = await fetchCastData(query, currentLocale);
-	//				data && dispatch(storeCredits(data));
-
-	// 			} catch (error) {
-	// 				console.error(error);
-	// 			}
-	// 		};
-	//
-	// 		fetchData();
-	//
-	// 		return () => {
-	// 			dispatch(storeCredits({
-	// 				cast:[],
-	// 				crew: [],
-	// 				movieData: {}
-	// 			}))
-	// 		}
-	// 	}
-	// }, [query, currentLocale]);
 
 	return (
 		<Empty

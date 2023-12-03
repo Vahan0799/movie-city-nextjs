@@ -79,11 +79,6 @@ body {
     @apply bg-primary-gray;
 }
 
-html,
-body {
-    //scrollbar-gutter: stable;
-}
-
 ::selection {
     @apply bg-primary-pink;
 }
