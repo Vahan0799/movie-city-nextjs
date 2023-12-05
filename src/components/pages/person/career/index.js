@@ -41,7 +41,7 @@ const Index = props => {
             <div className={styles.careerContainer}>
                 <div className={styles.careerBiography}>
                     <h3>{t('person.biography')}</h3>
-                    {details.biography ? (
+                    {details.biography ?
                         <p>{isTruncate ? truncatedBiography : details.biography}
                             {details.biography.length > truncateLimit &&
                                 <span
@@ -52,9 +52,9 @@ const Index = props => {
                             </span>
                             }
                         </p>
-                    ) : (
-                        <p>{t('person.missing-biography')} {details.name}</p>
-                    )}
+
+                        : <p>{t('person.missing-biography')} {details.name}</p>
+                    }
                 </div>
                 {topMovies.length > 0 &&
                     <div className={styles.careerKnown}>

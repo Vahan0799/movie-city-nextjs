@@ -1,4 +1,5 @@
 import React from 'react';
+import dynamic from 'next/dynamic';
 import classNames from 'classnames';
 import {useSelector} from 'react-redux';
 import Seo from '@/components/UI/Seo';
@@ -7,7 +8,7 @@ import Footer from '@/components/footer';
 import NextLink from '@/components/UI/NextLink';
 import PopularMovies from '@/components/popular-movies';
 import TopMovies from '@/components/top-movies';
-import MediaClip from '@/components/media-clip';
+const MediaClip = dynamic(import('@/components/media-clip'), {ssr: false});
 import {dynamicBackground} from '@/helpers';
 import {lowercaseString, truncateText} from '@/helpers/stringHelpers';
 import styles from './index.module.scss';

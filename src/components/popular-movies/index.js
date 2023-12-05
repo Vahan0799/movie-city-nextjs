@@ -77,13 +77,11 @@ const Index = () => {
                 {isLoading ? <div><SkeletonView/></div> : <>
                     {popularMovies.length !== 0 &&
                         <Swiper {...swiperOptions}>
-                            {popularMovies.map((item, key) => {
-                                return (
-                                    <SwiperSlide key={`popular-movie-${item.id}`}>
-                                        <MediaCard media={item} delay={key}/>
-                                    </SwiperSlide>
-                                )
-                            })}
+                            {popularMovies.map((item, key) =>
+                                <SwiperSlide key={`popular-movie-${item.id}`}>
+                                    <MediaCard media={item} delay={key}/>
+                                </SwiperSlide>
+                            )}
                         </Swiper>
                     }
                     <Button regular className="swiper-nav-prev popular-prev">

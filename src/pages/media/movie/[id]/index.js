@@ -1,9 +1,10 @@
 import React, {useState, useEffect} from 'react';
+import dynamic from 'next/dynamic';
 import {serverSideTranslations} from 'next-i18next/serverSideTranslations';
 import Default from '@/layouts/Default';
 import Media from '@/components/pages/media';
 import FullMovie from '@/components/pages/media/full-media';
-import ClipCard from '@/components/pages/media/clip-list';
+const ClipCard = dynamic(import('@/components/pages/media/clip-list'), {ssr: false});
 import SliderList from '@/components/slider-list';
 import Reviews from '@/components/pages/media/reviews';
 import Loader from '@/components/loader';
@@ -18,13 +19,9 @@ const Index = ({ movie }) => {
         };
     }, []);
 
-    if (unmounted) {
-        return null;
-    }
+    if (unmounted) return null;
 
-    if (!movie.info) {
-        return <Loader/>;
-    }
+    if (!movie.info) return <Loader/>;
 
     const movieWithDefaultClip = {
         ...movie,

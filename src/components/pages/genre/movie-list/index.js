@@ -1,6 +1,7 @@
 import React from 'react';
-import MediaCard from '@/components/media-card';
-import Skeleton from '@/components/media-card/skeleton';
+import dynamic from 'next/dynamic';
+const MediaCard = dynamic(import('@/components/media-card'));
+const Skeleton = dynamic(import('@/components/media-card/skeleton'));
 import styles from './index.module.scss';
 
 const Index = props => {

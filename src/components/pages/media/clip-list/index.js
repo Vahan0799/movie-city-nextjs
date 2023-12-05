@@ -42,26 +42,24 @@ const Index = props => {
 		<section className="slider-info-wrapper">
 			<div className={styles.clipList}>
 				<Swiper {...swiperOptions}>
-					{items.length > 0 && items.map((clip, key) => {
-						return (
-							<SwiperSlide key={`movie-clip-${key}`}>
-								<div className={styles.clipListItem}>
-									<NextImage
-										onClick={() => triggerClip(clip.key)}
-										src={CLIP_THUMBNAIL(clip.key)}
-										width={384}
-										height={216}
-										wrapperClass="button"
-										alt="Clip Image"
-									/>
-									<NextImage
-										wrapperClass={styles.clipPlay}
-										src={PlayIcon} alt="play-icon" width={25} height={25}
-									/>
-								</div>
-							</SwiperSlide>
-						)
-					})}
+					{items.length > 0 && items.map((clip, key) =>
+						<SwiperSlide key={`movie-clip-${key}`}>
+							<div className={styles.clipListItem}>
+								<NextImage
+									onClick={() => triggerClip(clip.key)}
+									src={CLIP_THUMBNAIL(clip.key)}
+									width={384}
+									height={216}
+									wrapperClass="button"
+									alt="Clip Image"
+								/>
+								<NextImage
+									wrapperClass={styles.clipPlay}
+									src={PlayIcon} alt="play-icon" width={25} height={25}
+								/>
+							</div>
+						</SwiperSlide>
+					)}
 				</Swiper>
 				<div className="swiper-pagination clip-pagination"/>
 			</div>

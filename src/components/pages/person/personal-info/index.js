@@ -135,11 +135,9 @@ const Index = props => {
                         </li>
                         <li>
                             <b>{t('person.known-as')}</b>
-                            {details.also_known_as.length > 0 ? (
-                                <>
-                                    {details.also_known_as.map((item, index) => <span key={index}>{item}</span>)}
-                                </>
-                            ) : (<span>-</span>)}
+                            {details.also_known_as.length > 0 ? <>
+                                {details.also_known_as.map((item, index) => <span key={index}>{item}</span>)}
+                            </> : <span>-</span>}
                         </li>
                     </ul>
                 </div>

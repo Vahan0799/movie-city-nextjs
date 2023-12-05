@@ -15,13 +15,9 @@ const Index = ({ tv }) => {
         return () => setUnmounted(true);
     }, []);
 
-    if (unmounted) {
-        return null;
-    }
+    if (unmounted) return null;
 
-    if (!tv.info) {
-        return <Loader/>;
-    }
+    if (!tv.info) return <Loader/>;
 
     const { info, cast, recommendations, reviews, imdbId } = tv;
 
