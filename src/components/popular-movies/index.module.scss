@@ -1,11 +1,20 @@
 .popularMovies {
     @apply mb-7 overflow-hidden;
 
-    &Slider {
+    &Slider,
+    &Load {
         @apply py-2 relative z-[2] bg-primary-gray;
 
         & > div {
             @apply min-h-[22.5vw];
+        }
+    }
+
+    &Load {
+
+
+        & > div {
+            @apply min-h-[unset] grid grid-cols-2 md:grid-cols-3 lg:grid-cols-7;
         }
     }
 }

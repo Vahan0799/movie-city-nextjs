@@ -16,6 +16,7 @@ const Id = () => {
 	const id = router.query.id;
 	const locale = router.locale;
 	const {tvGenreResults, tvGenreList} = useSelector(state => state.genre);
+	const [isLoading, setIsLoading] = useState(true);
 	const [currentPage, setCurrentPage] = useState(1);
 	const [totalPages, setTotalPages] = useState(1);
 	const [genreItem, setGenreItem] = useState({});
@@ -24,15 +25,21 @@ const Id = () => {
 
 	useEffect(() => {
 		if (id) {
+			setIsLoading(true);
+
 			getTvGenreResults(locale, id, currentPage)
 				.then(response => {
-					const filteredResults = response.results.filter(item => filterFetchResults(item))
-					const sortedResponse = filteredResults.sort((a, b) => b.vote_average - a.vote_average)
-					dispatch(setTvGenreResults(sortedResponse))
-					setTotalPages(response.total_pages)
+					const filteredResults = response.results.filter(item => filterFetchResults(item));
+					const sortedResponse = filteredResults.sort((a, b) => b.vote_average - a.vote_average);
+					dispatch(setTvGenreResults(sortedResponse));
+					setTotalPages(response.total_pages);
+					setIsLoading(false);
 				});
 
-			return () => dispatch(setTvGenreResults([]))
+			return () => {
+				setIsLoading(true);
+				dispatch(setTvGenreResults([]));
+			}
 		}
 	}, [id, locale, currentPage]);
 
@@ -45,9 +52,7 @@ const Id = () => {
 		setGenreItem(updatedGenreItem);
 	}, [tvGenreList, id, locale]);
 
-	const handlePageChange = (page) => {
-		setCurrentPage(page);
-	};
+	const handlePageChange = page => setCurrentPage(page);
 
 	return (
 		<Empty
@@ -66,7 +71,7 @@ const Id = () => {
 					currentPage={currentPage}
 					onPageChange={handlePageChange}
 				/>
-				<MovieList results={tvGenreResults} mediaType="tv"/>
+				<MovieList results={tvGenreResults} mediaType="tv" isLoading={isLoading}/>
 				<Pagination
 					totalPages={totalPages}
 					currentPage={currentPage}

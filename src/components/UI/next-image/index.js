@@ -23,7 +23,7 @@ const Index = props => {
             ])
         }>
             <Image
-                src={src ? imgSrc : fallBackSrc}
+                src={(src ? imgSrc : fallBackSrc) || '/placeholder.jpg' }
                 width={props.width || 300}
                 height={props.height || 450}
                 quality={80}

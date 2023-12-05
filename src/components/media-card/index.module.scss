@@ -58,9 +58,33 @@
         &Detailed:hover > div:not(:only-child):last-child {
             @apply translate-y-0;
         }
+
+        &Skeleton {
+            &::after {
+                background: {
+                    color: var(--color-primary-gray);
+                    image: linear-gradient(60deg, rgba(var(--color-primary-gray), 0) 40%, rgba(var(--color-primary-gray), 0.5) 50%, rgba(var(--color-primary-gray), 0) 60%);
+                    size: 200% 100%;
+                    repeat: no-repeat;
+                    position-x: -50%;
+                };
+                animation: shine 1s ease-out infinite;
+                box-shadow: unset;
+            }
+
+            img {
+                @apply invisible;
+            }
+        }
     }
 
     &Title {
         @apply text-ellipsis overflow-hidden text-sm text-center font-bold;
+    }
+}
+
+@keyframes shine {
+    to {
+        background-position-x: 200%;
     }
 }

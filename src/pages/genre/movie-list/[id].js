@@ -16,6 +16,7 @@ const Index = () => {
     const id = router.query.id;
     const locale = router.locale;
     const {movieGenreResults, movieGenreList} = useSelector(state => state.genre);
+    const [isLoading, setIsLoading] = useState(true);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
     const [genreItem, setGenreItem] = useState({});
@@ -24,15 +25,21 @@ const Index = () => {
 
     useEffect(() => {
         if (id) {
+            setIsLoading(true);
+
             getMovieGenreResults(locale, id, currentPage)
                 .then(response => {
-                    const filteredResults = response.results.filter(item => filterFetchResults(item))
-                    const sortedResponse = filteredResults.sort((a, b) => b.vote_average - a.vote_average)
-                    dispatch(setMovieGenreResults(sortedResponse))
-                    setTotalPages(response.total_pages)
+                    const filteredResults = response.results.filter(item => filterFetchResults(item));
+                    const sortedResponse = filteredResults.sort((a, b) => b.vote_average - a.vote_average);
+                    dispatch(setMovieGenreResults(sortedResponse));
+                    setTotalPages(response.total_pages);
+                    setIsLoading(false);
                 });
 
-            return () => dispatch(setMovieGenreResults([]));
+            return () => {
+                setIsLoading(true);
+                dispatch(setMovieGenreResults([]));
+            };
         }
     }, [id, locale, currentPage]);
 
@@ -45,9 +52,7 @@ const Index = () => {
         setGenreItem(updatedGenreItem);
     }, [movieGenreList, id, locale]);
 
-    const handlePageChange = (page) => {
-        setCurrentPage(page);
-    };
+    const handlePageChange = page => setCurrentPage(page);
 
     return (
         <Empty
@@ -66,7 +71,7 @@ const Index = () => {
                     currentPage={currentPage}
                     onPageChange={handlePageChange}
                 />
-                <MovieList results={movieGenreResults}/>
+                <MovieList results={movieGenreResults} isLoading={isLoading}/>
                 <Pagination
                     totalPages={totalPages}
                     currentPage={currentPage}
