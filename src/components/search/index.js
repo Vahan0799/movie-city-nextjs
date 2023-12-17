@@ -141,7 +141,7 @@ const Index = () => {
                                             query: {query: searchQuery},
                                         }}
                                     >
-                                        {t('search_results')}
+                                        {t('global.search_results')}
                                     </NextLink>}
                                     {isEmpty && <p>{t('noResults')}</p>}
                                 </p>
