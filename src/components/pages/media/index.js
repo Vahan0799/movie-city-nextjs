@@ -112,7 +112,7 @@ const Index = props => {
 							{data.genres.map(genre =>
 								<NextLink
 									key={genre.id}
-									href={`/genre/tv-list/${genre.id}?name=${encodeURIComponent(genre.name)}`}
+									href={`/genre/${type}-list/${genre.id}?name=${encodeURIComponent(genre.name)}`}
 								>
 									{genre.name}
 								</NextLink>)
