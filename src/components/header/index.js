@@ -77,7 +77,7 @@ const Index = () => {
     }, [movieGenreList, tvGenreList, locale]);
 
     return (
-        <header className={classNames([styles.header, (isDown && ((!showMovieGenres && !showTvGenres) && (!search.isQuery && !search.searched))) ? styles.headerDown : ''])}>
+        <header className={classNames([styles.header, (isDown && ((!showMovieGenres && !showTvGenres) && (!search.isQuery && !search.searched))) ? [styles.headerDown, 'header-is-hidden'] : ''])}>
             <div className={classNames(styles.headerInner, 'main-container')}>
                 <nav className={styles.nav}>
                     <NextLink href="/" className="max-w-[55px] lg:max-w-[120px]">

@@ -129,3 +129,7 @@ figure {
         }
     }
 }
+
+main:has(.header-is-hidden) .top-movies-wrapper {
+    @apply lg:top-[10px];
+}

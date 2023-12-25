@@ -37,7 +37,7 @@ const Index = () => {
 	}, 1000);
 
 	return (
-		<section>
+		<section className="top-movies-wrapper lg:sticky lg:top-[100px] lg:transition-[top] lg:duration-300">
 			<div className="flex items-center justify-between mb-5">
 				<h3 className="mb-0">{t('topMovies')}</h3>
 				<Button onClick={updateTopMovies}>
