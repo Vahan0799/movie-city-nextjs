@@ -6,7 +6,7 @@ import NextImage from '@/components/UI/next-image';
 import NextLink from '@/components/UI/NextLink';
 import Button from '@/components/UI/Button';
 import {dispatch} from '@/helpers';
-import {roundNumber} from '@/helpers/stringHelpers';
+import {roundNumber, formatDate} from '@/helpers/stringHelpers';
 import {setClipKey, setShowClip} from '@/redux/slices/movieSlice';
 import PlayIcon from '@/assets/images/icons/play-btn.svg';
 import styles from './index.module.scss';
@@ -80,8 +80,8 @@ const Index = props => {
 						<>
 							{data.number_of_episodes && <li>{t('media.number_of_episodes')}: <span>{data.number_of_episodes}</span></li>}
 							{data.number_of_seasons && <li>{t('media.number_of_seasons')}: <span>{data.number_of_seasons}</span></li>}
-							{data.first_air_date && <li>{t('media.first_air_date')}: <span>{data.first_air_date}</span></li>}
-							{data.last_air_date && <li>{t('media.last_air_date')}: <span>{data.last_air_date}</span></li>}
+							{data.first_air_date && <li>{t('media.first_air_date')}: <span>{formatDate(data.first_air_date)}</span></li>}
+							{data.last_air_date && <li>{t('media.last_air_date')}: <span>{formatDate(data.last_air_date)}</span></li>}
 							{data.episode_run_time > 0 && <li>
 								{t('media.duration')}:
 								<span>{data.episode_run_time} {t('media.min')} / {toHoursAndMinutes(data.episode_run_time)}</span>
@@ -89,7 +89,7 @@ const Index = props => {
 						</>
 					) : (
 						<>
-							<li>{t('media.year')}: <span>{data.release_date}</span></li>
+							<li>{t('media.year')}: <span>{formatDate(data.release_date)}</span></li>
 							{data.tagline && <li>{t('media.tagline')}: <span>{data.tagline}</span></li>}
 							{data.budget > 0 && <li>{t('media.budget')}: <span>{formattedCurrency(data.budget)}</span></li>}
 							{data.runtime > 0 &&

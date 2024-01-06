@@ -133,3 +133,34 @@ figure {
 main:has(.header-is-hidden) .top-movies-wrapper {
     @apply lg:top-[10px];
 }
+
+.conic-borders {
+    @apply relative;
+
+    &::before, &::after {
+        @apply content-[''] absolute inset-[-8px] -z-[1];
+        background-image: repeating-conic-gradient(
+                        from var(--a),
+                        rgb(var(--color-primary-blue)) 0%,
+                        rgb(var(--color-primary-blue)) 5%,
+                        transparent 15%, transparent 30%, rgb(var(--color-primary-blue)) 50%
+        );
+        animation: animating-border 7s linear infinite;
+    }
+}
+
+@property --a {
+    syntax: '<angle>';
+    inherits: false;
+    initial-value: 0deg;
+}
+
+@keyframes animating-border {
+    0% {
+        --a: 0deg;
+    }
+
+    100% {
+        --a: 360deg;
+    }
+}

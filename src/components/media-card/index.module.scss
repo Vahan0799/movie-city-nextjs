@@ -1,6 +1,56 @@
 .media {
     @apply w-full h-full relative;
 
+    &Image {
+        --corners: 3px;
+        @apply relative h-auto overflow-hidden;
+        box-shadow: var(--popular-shadow);
+
+        &::after {
+            @apply content-[''] absolute w-full h-full inset-0 mix-blend-screen
+            bg-cover bg-no-repeat bg-[url('../../assets/images/poster-texture.jpg')];
+            box-shadow: inset 0 0 25px 25px #000000;
+        }
+
+        &:has(.mediaConic) {
+            &::after {
+                @apply h-[calc(100%-calc(var(--corners)*2))] w-[calc(100%-calc(var(--corners)*2))]
+                top-[var(--corners)] left-[var(--corners)];
+            }
+
+            .mediaImageDetailed {
+                @apply h-[calc(100%-calc(var(--corners)*2))] w-[calc(100%-calc(var(--corners)*2))]
+                top-[var(--corners)] left-[var(--corners)];
+            }
+        }
+
+        img {
+            @apply w-full h-full object-cover;
+        }
+
+        &Detailed:hover > div:not(:only-child):last-child {
+            @apply translate-y-0;
+        }
+
+        &Skeleton {
+            &::after {
+                background: {
+                    color: var(--color-primary-gray);
+                    image: linear-gradient(60deg, rgba(var(--color-primary-gray), 0) 40%, rgba(var(--color-primary-gray), 0.5) 50%, rgba(var(--color-primary-gray), 0) 60%);
+                    size: 200% 100%;
+                    repeat: no-repeat;
+                    position-x: -50%;
+                };
+                animation: shine 1s ease-out infinite;
+                box-shadow: unset;
+            }
+
+            img {
+                @apply invisible;
+            }
+        }
+    }
+
     &Details {
         @apply max-lg:hidden
         absolute w-full h-full top-0 left-0 z-[2] p-2 text-white
@@ -41,40 +91,17 @@
         }
     }
 
-    &Image {
-        @apply relative h-auto overflow-hidden;
-        box-shadow: var(--popular-shadow);
+    &Conic {
+        @apply p-[var(--corners)];
 
         &::after {
-            @apply content-[''] absolute w-full h-full inset-0 mix-blend-screen
-            bg-cover bg-no-repeat bg-[url('../../assets/images/poster-texture.jpg')];
-            box-shadow: inset 0 0 25px 25px #000000;
+            @apply h-[calc(100%-calc(var(--corners)*2))] w-[calc(100%-calc(var(--corners)*2))]
+            top-[var(--corners)] left-[var(--corners)];
         }
 
-        img {
-            @apply w-full h-full object-cover;
-        }
-
-        &Detailed:hover > div:not(:only-child):last-child {
-            @apply translate-y-0;
-        }
-
-        &Skeleton {
-            &::after {
-                background: {
-                    color: var(--color-primary-gray);
-                    image: linear-gradient(60deg, rgba(var(--color-primary-gray), 0) 40%, rgba(var(--color-primary-gray), 0.5) 50%, rgba(var(--color-primary-gray), 0) 60%);
-                    size: 200% 100%;
-                    repeat: no-repeat;
-                    position-x: -50%;
-                };
-                animation: shine 1s ease-out infinite;
-                box-shadow: unset;
-            }
-
-            img {
-                @apply invisible;
-            }
+        & + div {
+            @apply h-[calc(100%-calc(var(--corners)*2))] w-[calc(100%-calc(var(--corners)*2))]
+            top-[var(--corners)] left-[var(--corners)];
         }
     }
 

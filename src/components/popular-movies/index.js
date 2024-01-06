@@ -79,7 +79,7 @@ const Index = () => {
                         <Swiper {...swiperOptions}>
                             {popularMovies.map((item, key) =>
                                 <SwiperSlide key={`popular-movie-${item.id}`}>
-                                    <MediaCard media={item} delay={key}/>
+                                    <MediaCard media={item} delay={key} bordered/>
                                 </SwiperSlide>
                             )}
                         </Swiper>

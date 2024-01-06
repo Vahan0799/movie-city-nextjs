@@ -4,6 +4,8 @@ export const roundNumber = number => Math.round(number * 100) / 100;
 
 export const extractYear = date => moment(date, 'YYYY/MM/DD').year();
 
+export const formatDate = date => moment(date).format('DD/MM/YYYY');
+
 export const lowercaseString = str => {
 	if (str) {
 		const replacedStr = str.replace(/[^a-zA-Z0-9]+/g, '-');

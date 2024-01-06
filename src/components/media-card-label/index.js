@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import NextLink from '@/components/UI/NextLink';
 import NextImage from '@/components/UI/next-image';
 import {IMAGE_PATH} from '@/constants';
-import {roundNumber, lowercaseString} from '@/helpers/stringHelpers';
+import {roundNumber, lowercaseString, formatDate} from '@/helpers/stringHelpers';
 import {fadeInVariants} from '@/helpers/moduleHelpers';
 import styles from './index.module.scss';
 
@@ -39,11 +39,9 @@ const Index = props => {
                 </div>
                 <div className={styles.mediaCardDetails}>
                     <h4>{media?.title || media?.name}</h4>
-                    <p>{t('media.year')}: <strong>{media?.release_date || media?.first_air_date}</strong></p>
+                    <p>{t('media.year')}: <strong>{formatDate(media?.release_date || media?.first_air_date)}</strong></p>
                     <p>{t('media.totalVotes')}: <strong>{media.vote_count}</strong></p>
-                    <span className="vote-circle">
-                        {roundNumber(media.vote_average)}
-                    </span>
+                    <span className="vote-circle">{roundNumber(media.vote_average)}</span>
                 </div>
             </NextLink>
         </motion.div>

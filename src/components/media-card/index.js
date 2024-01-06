@@ -6,7 +6,7 @@ import StarRatings from 'react-star-ratings/build/star-ratings';
 import NextLink from '@/components/UI/NextLink';
 import NextImage from '@/components/UI/next-image';
 import {IMAGE_PATH} from '@/constants';
-import {roundNumber, lowercaseString} from '@/helpers/stringHelpers';
+import {roundNumber, lowercaseString, formatDate} from '@/helpers/stringHelpers';
 import {fadeInVariants, floatUpVariants} from '@/helpers/moduleHelpers';
 import styles from './index.module.scss';
 
@@ -15,7 +15,8 @@ const Index = props => {
         media,
         mediaType = 'movie',
         delay,
-        detailed
+        detailed,
+        bordered
     } = props;
 
     const {t} = useTranslation();
@@ -39,16 +40,18 @@ const Index = props => {
                         variants={floatUpVariants}
                         transition={{type: 'spring', stiffness: 100, delay: delay * 0.12}}
                     >
-                        <NextImage
-                            className="transition-transform duration-500"
-                            src={IMAGE_PATH(media.poster_path)}
-                            width={300} height={450} alt={`Title - ${media?.title || media?.name}`}
-                        />
+                        <div className={classNames([bordered && [styles.mediaConic, 'conic-borders']])}>
+                            <NextImage
+                                className="transition-transform duration-500"
+                                src={IMAGE_PATH(media.poster_path)}
+                                width={300} height={450} alt={`Title - ${media?.title || media?.name}`}
+                            />
+                        </div>
                         {detailed &&
                             <div className={styles.mediaDetails}>
                                 <ul>
                                     <li><span>{t('media.year')}: </span>
-                                        {media?.release_date || media?.first_air_date}
+                                        {formatDate(media?.release_date || media?.first_air_date)}
                                     </li>
                                     <li><span>{t('media.totalVotes')}: </span> {media.vote_count}</li>
                                     <li><span>{t('media.popularity')}: </span>{media.popularity}</li>
