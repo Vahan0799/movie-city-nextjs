@@ -9,6 +9,11 @@
         @apply p-[8px_12px] bg-primary-blue text-white rounded-[6px]
         flex items-center justify-center transition-colors hover:bg-secondary-blue;
         box-shadow: inset -5px -5px 4px rgba(53, 53, 53, 0.3);
+
+        &:focus,
+        &:focus-within {
+            box-shadow: inset -5px -5px 4px rgba(53, 53, 53, 0.3);
+        }
     }
 }
 

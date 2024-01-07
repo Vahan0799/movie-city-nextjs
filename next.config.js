@@ -4,8 +4,7 @@ const { i18n } = require('./next-i18next.config');
 const nextConfig = {
     i18n: {
         locales: i18n.locales,
-        defaultLocale: i18n.defaultLocale,
-        localeDetection: true,
+        defaultLocale: i18n.defaultLocale
     },
 
     env: {
