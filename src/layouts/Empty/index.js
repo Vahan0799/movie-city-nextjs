@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import classNames from 'classnames';
+import {PopularMovieContext} from '@/providers/PopularMovieContext';
 import Seo from '@/components/UI/Seo';
 import Header from '@/components/header/index';
 import Footer from '@/components/footer';
@@ -15,6 +16,7 @@ const Index = props => {
 		backgroundPoster,
 		className
 	} = props;
+	const popularMovie = useContext(PopularMovieContext);
 
 	return (
 		<>
@@ -32,7 +34,7 @@ const Index = props => {
 						</div>
 					</div>
 				</div>
-				<Footer/>
+				<Footer data={popularMovie}/>
 			</main>
 		</>
 	)
