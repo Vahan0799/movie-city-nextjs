@@ -45,7 +45,7 @@ const getMovieClipList = id => {
 	const responsePromise = $api().get(`/movie/${id}/videos?api_key=${API_KEY}&language=en`);
 
 	return responsePromise
-		.then(response => response.data.results)
+		.then(response => response.data.results.slice(0, 10))
 		.catch(error => console.error(error))
 };
 

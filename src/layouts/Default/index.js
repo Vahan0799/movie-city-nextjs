@@ -27,7 +27,7 @@ const Index = props => {
 
     const layoutBackground = backgroundPoster || popularMovie.backdrop_path;
 
-    console.log('renrered');
+    console.log('Rendered');
 
     return (
         <>
