@@ -8,8 +8,7 @@ export const index = createSlice({
             isQuery: false,
             searched: false
         },
-        searchPageResults: [],
-        popularMovie: {},
+        searchPageResults: []
     },
 
     reducers: {
@@ -23,10 +22,6 @@ export const index = createSlice({
 
         setSearchPageResults: (state, action) => {
             state.searchPageResults = action.payload;
-        },
-
-        setPopularMovieOfDay: (state, action) => {
-            state.popularMovie = action.payload;
         }
     }
 })
@@ -34,8 +29,7 @@ export const index = createSlice({
 export const {
     setPopularMovies,
     setSearchStates,
-    setSearchPageResults,
-    setPopularMovieOfDay
+    setSearchPageResults
 } = index.actions;
 
 export default index.reducer;

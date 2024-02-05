@@ -1,34 +1,22 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import classNames from 'classnames';
-import {useSelector} from 'react-redux';
 import NextLink from '@/components/UI/NextLink';
 import FooterLogo from '@/components/svg/footer-logo';
-import {getPopularMovieOfDay} from '@/services/global';
-import {setPopularMovieOfDay} from '@/redux/slices/globalSlice';
-import {dispatch, dynamicBackground} from '@/helpers';
+import {dynamicBackground} from '@/helpers';
 import {lowercaseString} from '@/helpers/stringHelpers';
 import styles from './index.module.scss';
 
-const Index = () => {
-	const {popularMovie} = useSelector(state => state.global);
-
-	useEffect(() => {
-		if (Object.keys(popularMovie).length === 0) {
-			getPopularMovieOfDay()
-				.then(response => {
-					dispatch(setPopularMovieOfDay(response))
-				})
-		}
-	},[]);
+const Index = props => {
+	const {data} = props;
 
 	return (
 		<footer className={classNames([styles.footer, 'fixed-background'])}
-				style={popularMovie.backdrop_path && dynamicBackground(popularMovie.backdrop_path)}
+				style={data.backdrop_path && dynamicBackground(data.backdrop_path)}
 		>
 			<div className={styles.footerWrapper}>
-				{popularMovie.backdrop_path &&
+				{data.backdrop_path &&
 					<NextLink
-						href={`/media/movie/${popularMovie.id}-${lowercaseString(popularMovie.original_title)}`}
+						href={`/media/movie/${data.id}-${lowercaseString(data.original_title)}`}
 						className={styles.footerUrl}
 					/>
 				}

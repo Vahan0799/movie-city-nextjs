@@ -1,21 +1,12 @@
-import React, {useEffect} from 'react';
-import {useSelector} from 'react-redux';
+import React, {useContext} from 'react';
 import NextLink from '@/components/UI/NextLink';
-import {dispatch, dynamicBackground} from '@/helpers';
+import {PopularMovieContext} from '@/providers/PopularMovieContext';
+import {dynamicBackground} from '@/helpers';
 import {lowercaseString} from '@/helpers/stringHelpers';
-import {getPopularMovieOfDay} from '@/services/global';
-import {setPopularMovieOfDay} from '@/redux/slices/globalSlice';
 import styles from './index.module.scss';
 
 const NotFoundBanner = () => {
-	const {popularMovie} = useSelector(state => state.global);
-
-	useEffect(() => {
-		getPopularMovieOfDay()
-			.then(response => {
-				dispatch(setPopularMovieOfDay(response))
-			})
-	},[]);
+	const popularMovie = useContext(PopularMovieContext);
 
 	return (
 		<section className={styles.notFoundWrapper}

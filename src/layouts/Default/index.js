@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import dynamic from 'next/dynamic';
 import classNames from 'classnames';
-import {useSelector} from 'react-redux';
+import {PopularMovieContext} from '@/providers/PopularMovieContext';
 import Seo from '@/components/UI/Seo';
 import Header from '@/components/header/index';
 import Footer from '@/components/footer';
@@ -23,9 +23,11 @@ const Index = props => {
         backgroundPoster
     } = props;
 
-    const {popularMovie} = useSelector(state => state.global);
+    const popularMovie = useContext(PopularMovieContext);
 
-    const layoutBackground = backgroundPoster || popularMovie?.backdrop_path;
+    const layoutBackground = backgroundPoster || popularMovie.backdrop_path;
+
+    console.log('renrered');
 
     return (
         <>
@@ -59,7 +61,7 @@ const Index = props => {
                         </div>
                     </div>
                 </div>
-                <Footer/>
+                <Footer data={popularMovie}/>
             </main>
             <MediaClip/>
         </>
