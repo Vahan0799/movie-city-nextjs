@@ -29,7 +29,7 @@
 
     &SmartResults {
         @apply h-fit absolute top-[40px] left-0 w-full text-[14px]
-        bg-primary-gray rounded-[10px] overflow-hidden p-2 z-[1];
+        bg-primary-gray rounded-[10px] overflow-hidden p-2 z-1;
 
         ul {
             @apply border-b-[1px] border-solid border-black-white pb-2 mb-2 overflow-hidden h-fit;

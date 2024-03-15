@@ -1,12 +1,12 @@
 .footer {
-    @apply h-[300px] lg:h-[450px] w-full relative z-[1];
+    @apply h-[300px] lg:h-[450px] w-full relative z-1;
 
     &Wrapper {
-        @apply w-full h-[inherit] fixed left-0 bottom-0 z-[-1]
+        @apply w-full h-[inherit] fixed left-0 bottom-0 -z-1
         flex flex-col items-center justify-center;
 
         &:has(> a) > div {
-            @apply relative z-[1];
+            @apply relative z-1;
         }
     }
 
@@ -23,6 +23,6 @@
     }
 
     &Url {
-        @apply absolute w-full h-full top-0 left-0 z-[1];
+        @apply absolute w-full h-full top-0 left-0 z-1;
     }
 }

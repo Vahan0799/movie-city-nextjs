@@ -73,7 +73,7 @@
             @apply max-lg:border-b-[2px] max-lg:border-solid max-lg:border-primary-blue;
 
             & > p {
-                @apply cursor-pointer pb-[5px] transition-[padding] duration-300
+                @apply pb-[5px] transition-[padding] duration-300
                 lg:pb-0 relative lg:pr-[25px];
 
                 &::before, &::after {

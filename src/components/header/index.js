@@ -33,6 +33,11 @@ const Index = () => {
     const {movieGenreList, tvGenreList} = useSelector(state => state.genre);
     const {search} = useSelector(({global}) => global);
 
+    const classList = () => {
+        return classNames([styles.header, (isDown && ((!showMovieGenres && !showTvGenres) &&
+            (!search.isQuery && !search.searched))) ? [styles.headerDown, 'header-is-hidden'] : ''])
+    };
+
     const openMobileMenu = () => setNavOpen(true);
 
     const closeMobileMenu = () => {
@@ -51,6 +56,23 @@ const Index = () => {
         setShowTvGenres(!showTvGenres);
     };
 
+    const genreDropdown = [
+        {
+            type: 'movie',
+            state: showMovieGenres,
+            handler: toggleMovieGenreDropdown,
+            title: 'global.genres_movies',
+            list: movieGenreList
+        },
+        {
+            type: 'tv',
+            state: showTvGenres,
+            handler: toggleTvGenreDropdown,
+            title: 'global.genres_tv',
+            list: tvGenreList
+        }
+    ];
+
     useClickOutSide(mobileMenuContainer, closeMobileMenu, mobileMenuTrigger);
 
     useEffect(() => {
@@ -65,7 +87,7 @@ const Index = () => {
     }, [movieGenreList, tvGenreList, locale]);
 
     return (
-        <header className={classNames([styles.header, (isDown && ((!showMovieGenres && !showTvGenres) && (!search.isQuery && !search.searched))) ? [styles.headerDown, 'header-is-hidden'] : ''])}>
+        <header className={classList()}>
             <div className={classNames(styles.headerInner, 'main-container')}>
                 <nav className={styles.nav}>
                     <NextLink href="/" className="max-w-[55px] lg:max-w-[120px]">
@@ -77,56 +99,34 @@ const Index = () => {
                                 <LanguageSwitch/>
                                 <Search/>
                                 <ul className={styles.navList}>
-                                    <li className={classNames([
-                                        styles.navListItem,
-                                        showMovieGenres && styles.navListItemOpen
-                                    ])}
-                                        onClick={toggleMovieGenreDropdown}>
-                                        <p className="gradient-text !absolute blur-[4px]">
-                                            {t('global.genres_movies')}
-                                        </p>
-                                        <p className="gradient-text">
-                                            {t('global.genres_movies')}
-                                        </p>
+                                    {genreDropdown.map((item, key) => {
+                                        return (
+                                            <li className={classNames([
+                                                styles.navListItem,
+                                                item.state && styles.navListItemOpen
+                                            ])} key={key} onClick={item.handler}
+                                            >
+                                                <p className="gradient-text !absolute blur-[4px] cursor-pointer">
+                                                    {t(item.title)}
+                                                </p>
+                                                <p className="gradient-text cursor-pointer">
+                                                    {t(item.title)}
+                                                </p>
 
-                                        <div className={classNames([
-                                            styles.navDropdown,
-                                            showMovieGenres && styles.navDropdownActive
-                                        ])}>
-                                            <ul className={styles.navDropdownBody}>
-                                                {movieGenreList.map(genre => <li key={genre.id}>
-                                                    <NextLink href={`/genre/movie-list/${genre.id}?name=${encodeURIComponent(genre.name)}`}>
-                                                        {genre.name}
-                                                    </NextLink>
-                                                </li>)}
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li className={classNames([
-                                        styles.navListItem,
-                                        showTvGenres && styles.navListItemOpen
-                                    ])}
-                                        onClick={toggleTvGenreDropdown}>
-                                        <p className="gradient-text !absolute blur-[4px]">
-                                            {t('global.genres_tv')}
-                                        </p>
-                                        <p className="gradient-text">
-                                            {t('global.genres_tv')}
-                                        </p>
-
-                                        <div className={classNames([
-                                            styles.navDropdown,
-                                            showTvGenres && styles.navDropdownActive
-                                        ])}>
-                                            <ul className={styles.navDropdownBody}>
-                                                {tvGenreList.map(genre => <li key={genre.id}>
-                                                    <NextLink href={`/genre/tv-list/${genre.id}?name=${encodeURIComponent(genre.name)}`}>
-                                                        {genre.name}
-                                                    </NextLink>
-                                                </li>)}
-                                            </ul>
-                                        </div>
-                                    </li>
+                                                <div className={classNames([
+                                                    styles.navDropdown, item.state && styles.navDropdownActive
+                                                ])}>
+                                                    <ul className={styles.navDropdownBody}>
+                                                        {item.list.map(genre => <li key={genre.id}>
+                                                            <NextLink href={`/genre/${item.type}-list/${genre.id}?name=${encodeURIComponent(genre.name)}`}>
+                                                                {genre.name}
+                                                            </NextLink>
+                                                        </li>)}
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                        )
+                                    })}
                                 </ul>
                                 <Button
                                     regular
