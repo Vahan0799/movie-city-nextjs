@@ -2,8 +2,7 @@
     @apply relative z-[-1] w-[56px] h-[70px] bg-primary-blue before:left-[5px] after:right-[5px];
 
     &::before, &::after {
-        @apply content-[''] absolute h-[120%] border-l-[5px] border-dashed border-[#F5F1ED];
-        animation: roll 100ms infinite;
+        @apply content-[''] absolute h-[120%] border-l-[5px] border-dashed border-[#F5F1ED] animate-rolling
     }
 
     &Container {
@@ -13,9 +12,4 @@
             @apply text-primary-blue font-bold;
         }
     }
-}
-
-@keyframes roll {
-    0% {top: 0px;}
-    100% {top: -15px;}
 }

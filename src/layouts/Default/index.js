@@ -27,8 +27,6 @@ const Index = props => {
 
     const layoutBackground = backgroundPoster || popularMovie.backdrop_path;
 
-    console.log('Rendered');
-
     return (
         <>
             <Seo title={title} description={truncateText(description, 120)} image={image} staticImage={staticImage}/>

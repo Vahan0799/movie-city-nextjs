@@ -5,11 +5,11 @@ import SliderList from '@/components/slider-list';
 import {dispatch} from '@/helpers';
 import {useCurrentLocale} from '@/hooks/useLocale';
 import useDebounce from '@/hooks/useDebounce';
-import {getTrendingMovie} from '@/services/home';
+import {getTrendingTv, getTrendingMovie} from '@/services/home';
 import {setTrending} from '@/redux/slices/homeSlice';
 import styles from './index.module.scss';
 
-const Index = () => {
+const Index = ({contentType}) => {
 	const [trendingBy, setTrendingBy] = useState('day');
 	const locale = useCurrentLocale();
 	const {trending} = useSelector(state => state.home);
@@ -17,12 +17,18 @@ const Index = () => {
 	const {t} = useTranslation();
 
 	useEffect(() => {
-		getTrendingMovie(locale, trendingBy)
-			.then(response => dispatch(setTrending({
-				movies: response
-			})))
+		const fetchData = async () => {
+			const response = contentType === 'tv' ?
+				await getTrendingTv(locale, trendingBy) :
+				await getTrendingMovie(locale, trendingBy);
 
-	},[trendingBy, locale]);
+			dispatch(setTrending({
+				[contentType]: response
+			}));
+		};
+
+		fetchData();
+	}, [contentType, trendingBy, locale]);
 
 	const trendingLabels = [
 		{
@@ -35,7 +41,7 @@ const Index = () => {
 		}
 	];
 
-	const changeTrendingBy = useDebounce(type => {
+	const handleTrendingChange = useDebounce(type => {
 		setTrendingBy(type);
 	}, 500);
 
@@ -48,21 +54,22 @@ const Index = () => {
 					>
 						<input
 							type="radio"
-							id={`trending-movie-${trending.title}`}
+							id={`trending-${contentType}-${trending.title}`}
 							className="hidden"
-							onChange={() => changeTrendingBy(trending.type)}
+							onChange={() => handleTrendingChange(trending.type)}
 							checked={trendingBy === trending.type}
 						/>
-						<label htmlFor={`trending-movie-${trending.title}`}>
+						<label htmlFor={`trending-${contentType}-${trending.title}`}>
 							<span className="gradient-text">{t(trending.title)}</span>
 						</label>
 					</div>
 				)}
 			</div>
 			<SliderList
-				listType="trending-movies"
-				title="trendingMovies"
-				items={trending.movies}
+				listType={`trending-${contentType}`}
+				title={contentType === 'tv' ? 'trendingShows' : 'trendingMovies'}
+				items={trending[contentType]}
+				mediaType={contentType}
 			/>
 		</section>
 	)

@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 
-function withOpacity(variableName) {
-    return ({opacityValue}) => {
+function withOpacity(variableName, opacityValue = undefined) {
+    return () => {
         if (opacityValue !== undefined) {
             return `rgba(var(${variableName}), ${opacityValue})`;
         }
@@ -47,7 +47,36 @@ module.exports = {
                 'primary-gray': withOpacity('--color-primary-gray'),
                 'secondary-gray': withOpacity('--color-secondary-gray'),
             },
-            zIndex: {1: 1}
+            zIndex: {1: 1},
+            keyframes: {
+                wiggle: {
+                    '0%, 50%, 100%': {
+                        transform: 'translateY(-50%) rotate(0deg)'
+                    },
+
+                    '25%': {
+                        transform: 'translateY(-50%) rotate(6deg)'
+                    },
+
+                    '75%': {
+                        transform: 'translateY(-50%) rotate(-6deg)'
+                    }
+                },
+                roll: {
+                    '0%': {
+                        top: '0px'
+                    },
+
+                    '100%': {
+                        top: '-15px'
+                    }
+                }
+            },
+
+            animation: {
+                wiggly: 'wiggle 550ms linear infinite both',
+                rolling: 'roll 100ms infinite'
+            }
         },
     },
     plugins: []

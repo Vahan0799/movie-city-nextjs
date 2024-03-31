@@ -10,7 +10,7 @@ import styles from './index.module.scss';
 const Index = () => {
 	const {clipKey, showClip} = useSelector(state => state.movie);
 
-	const hideClip = () => {
+	const handleClipHide = () => {
 		dispatch(setShowClip(false));
 		dispatch(setClipKey(null));
 	};
@@ -37,7 +37,7 @@ const Index = () => {
 					transition={{duration: 0.4}}
 					className={classNames([styles.clipContainer, 'movie-list-info-wrapper'])}
 				>
-					<Button className={styles.clipClose} onClick={hideClip}/>
+					<Button className={styles.clipClose} onClick={handleClipHide}/>
 					<motion.div
 						initial="toOut"
 						animate="toIn"
@@ -45,7 +45,7 @@ const Index = () => {
 						variants={scaleInVariants}
 						transition={{duration: 0.2}}
 						className={styles.clipHolder}
-						onClick={hideClip}
+						onClick={handleClipHide}
 					>
 						<iframe width="560" height="315"
 								src={`https://www.youtube.com/embed/${clipKey}`}

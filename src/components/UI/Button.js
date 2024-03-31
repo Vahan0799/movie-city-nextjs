@@ -9,12 +9,12 @@ const Button = props => {
         ...rest
     } = props;
 
-    const classes = () => {
+    const classList = () => {
         return regular ? className : `btn${design ? ` btn-${design}` : ''}${className ? ` ${className}` : ''}`
     }
 
     return (
-        <button className={classes()} {...rest}>
+        <button className={classList()} {...rest}>
             {children}
         </button>
     )

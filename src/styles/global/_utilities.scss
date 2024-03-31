@@ -72,8 +72,7 @@
     }
 
     &-button-disabled {
-        opacity: 0.5;
-        pointer-events: none;
+        @apply opacity-50 pointer-events-none;
     }
 }
 

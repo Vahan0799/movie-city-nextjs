@@ -62,8 +62,7 @@
     }
 
     &Toggler {
-        @apply w-[30px] h-[30px] absolute top-1/2 right-[15px] lg:hidden;
-        animation: wiggle 550ms linear infinite both;
+        @apply animate-wiggly w-[30px] h-[30px] absolute top-1/2 right-[15px] lg:hidden;
     }
 
     &List {
@@ -110,7 +109,7 @@
         lg:absolute lg:top-[83px] lg:p-4 lg:transition-[clip-path]
         lg:pointer-events-none lg:duration-300;
 
-        @media (min-width: 1024px) {
+        @screen lg {
             clip-path: inset(0 0 100% 0);
         }
 
@@ -119,7 +118,7 @@
             max-lg:grid-rows-[1fr]
             lg:pointer-events-auto;
 
-            @media (min-width: 1024px) {
+            @screen lg {
                 clip-path: inset(0 0 0 0);
             }
         }
@@ -137,19 +136,5 @@
                 @apply max-lg:text-[clamp(12px,3.2vw,18px)]
             }
         }
-    }
-}
-
-@keyframes wiggle {
-    0%, 50%, 100% {
-        transform: translateY(-50%) rotate(0deg);
-    }
-
-    25% {
-        transform: translateY(-50%) rotate(6deg);
-    }
-
-    75% {
-        transform: translateY(-50%) rotate(-6deg);
     }
 }

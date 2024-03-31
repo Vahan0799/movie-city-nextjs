@@ -2,9 +2,8 @@ import React from 'react';
 import {useTranslation} from 'next-i18next';
 import {serverSideTranslations} from 'next-i18next/serverSideTranslations';
 import Default from '@/layouts/Default';
-import TrendingTv from '@/components/pages/home/trending-tv';
 import MoviesPaginate from '@/components/pages/home/movies-paginate';
-import TrendingMovies from '@/components/pages/home/trending-movies';
+import Trending from '@/components/pages/home/trending';
 
 const Home = () => {
     const {t} = useTranslation();
@@ -16,8 +15,8 @@ const Home = () => {
             staticImage="/movie-city.svg"
         >
             <MoviesPaginate/>
-            <TrendingTv/>
-            <TrendingMovies/>
+            <Trending contentType="tv"/>
+            <Trending contentType="movies"/>
         </Default>
     )
 }
