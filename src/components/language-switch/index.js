@@ -8,6 +8,15 @@ import styles from './index.module.scss';
 const Index = () => {
 	const router = useRouter();
 
+	const handleLocaleChange = locale => {
+		router.push({
+			pathname: router.pathname,
+			query: router.query,
+		}, null, { locale });
+
+		Cookies.set('NEXT_LOCALE', locale, {expires: 14});
+	};
+
 	return(
 		<ul className={styles.languageSwitchContainer}>
 			{router.locales.map(locale => (
@@ -21,14 +30,7 @@ const Index = () => {
 						regular
 						className="gradient-text-blurred"
 						data-text={locale.toUpperCase()}
-						onClick={() => {
-							router.push({
-								pathname: router.pathname,
-								query: router.query,
-							}, null, { locale });
-
-							Cookies.set('NEXT_LOCALE', locale, {expires: 14});
-						}}
+						onClick={() => handleLocaleChange(locale)}
 					>
 						{locale.toUpperCase()}
 					</Button>
