@@ -67,6 +67,9 @@ export const getServerSideProps = async ({ locale, query }) => {
 
     return {
         props: {
+            title: tv.info.name,
+            description: tv.info.overview,
+            image: tv.info.poster_path,
             tv,
             ...(await serverSideTranslations(locale)),
         },

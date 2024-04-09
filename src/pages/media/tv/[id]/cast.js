@@ -12,9 +12,6 @@ const CastPage = ({ cast, crew, tvData }) => {
 
 	return (
 		<Empty
-			title={`${tvData.name} - ${t('pageMetas.castTitle')}`}
-			description={`${tvData.name} - ${t('pageMetas.castTitle')}`}
-			image={tvData.backdrop_path}
 			backgroundPoster={tvData.backdrop_path}
 			className="transparent-bg"
 		>
@@ -27,6 +24,8 @@ const CastPage = ({ cast, crew, tvData }) => {
 export default CastPage;
 
 export const getServerSideProps = async ({ locale, query }) => {
+	const translated = locale === 'ru' ? 'Актеры и съемочная группа' : 'Cast & Crew'
+
 	try {
 		const currentLocale = locale || 'en';
 		const { id } = query;
@@ -37,6 +36,9 @@ export const getServerSideProps = async ({ locale, query }) => {
 
 		return {
 			props: {
+				title: `${tvData.name} ${translated}`,
+				description: `${tvData.name} ${translated}`,
+				image: tvData.backdrop_path,
 				...(await serverSideTranslations(currentLocale)),
 				cast,
 				crew,

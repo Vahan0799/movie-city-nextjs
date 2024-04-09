@@ -41,7 +41,7 @@ const Index = () => {
 	};
 
 	return (
-		<Default title={t('searchResults')}>
+		<Default>
 			<section className={`min-h-[70vh] min-h-[70dvh] grid${!isEmpty ? ' grid-cols-2 lg:grid-cols-3' : ''}`}>
 				{searchPageResults.map(((media, key) =>
 					<MediaCard
@@ -71,8 +71,15 @@ const Index = () => {
 
 export default Index;
 
-export const getServerSideProps = async ({ locale }) => ({
-	props: {
-		...(await serverSideTranslations(locale))
-	}
-});
+export const getServerSideProps = async ({locale}) => {
+    const translated = locale === 'ru' ? 'Результаты поиска' : 'Search Results for';
+
+    return {
+        props: {
+            title: `Movie City`,
+            description: `Movie City - ${translated}`,
+            staticImage: '/movie-city.svg',
+            ...(await serverSideTranslations(locale))
+        }
+    }
+};

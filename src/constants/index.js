@@ -1,3 +1,4 @@
+export const APP_URL = process.env.APP_URL;
 export const API_URL = process.env.API_URL;
 export const API_KEY = process.env.API_KEY;
 export const API_TOKEN = process.env.API_TOKEN;

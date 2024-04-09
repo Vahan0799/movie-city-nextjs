@@ -9,10 +9,6 @@
     "more": "Read More",
     "less": "Read Less"
   },
-  "pageMetas": {
-    "castTitle": "Cast & Crew",
-    "homeDescription": "Join us and invite your friends to watch movies online for free in HD with MovieCity!"
-  },
   "media": {
     "trailer": "Watch Trailer",
     "title": "Title",
@@ -69,7 +65,6 @@
   "trendingShows": "Trending Shows",
   "topMovies":  "Top Movies",
   "toCinema": "Now Playing",
-  "searchResults": "Search Results for",
   "noResults": "There are no results that matched your query.",
   "loader": "Loading"
 }

@@ -55,10 +55,7 @@ const Id = () => {
 	const handlePageChange = page => setCurrentPage(page);
 
 	return (
-		<Empty
-			title={`Movie City - ${t('global.genre')} - ${genreItem && capitalizeFirstLetter(genreItem.name)}`}
-			description={`Movie City - ${t('global.genre')} - ${router.query.name}`}
-		>
+		<Empty>
 			<div className="genre-results">
 				<h1 className="text-right p-3 w-fit ml-auto">
 					{t('global.genre')}:&nbsp;
@@ -85,8 +82,13 @@ const Id = () => {
 export default Id;
 
 export const getServerSideProps = async ({locale}) => {
+	const translated = locale === 'ru' ? 'Жанры' : 'Genres';
+
 	return {
 		props: {
+			title: `Movie City`,
+			description: `Movie City - ${translated}`,
+			staticImage: '/movie-city.svg',
 			...(await serverSideTranslations(locale)),
 		},
 	};

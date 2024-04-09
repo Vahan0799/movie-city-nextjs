@@ -9,11 +9,7 @@ const Index = ({person}) => {
 	const {details, socialMedia, topPopularMovies, career} = person;
 
 	return (
-		<Empty
-			title={details.name}
-			description={details.name}
-			image={details.profile_path}
-		>
+		<Empty>
 			<div className="grid gap-3 mt-7 lg:grid-cols-[.5fr_1fr] lg:gap-5">
 				<PersonalInfo
 					details={details}
@@ -48,6 +44,9 @@ export const getServerSideProps = async ({locale, query}) => {
 
 	return {
 		props: {
+			title: person.name,
+			description: person.overview,
+			image: person.profile_path,
 			person,
 			...(await serverSideTranslations(locale)),
 		},

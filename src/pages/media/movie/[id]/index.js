@@ -28,7 +28,7 @@ const Index = ({ movie }) => {
         clip: movie.clip || null,
     };
 
-    const { info, clip,cast, recommendations, similar, reviews, imdbId, clipList } = movieWithDefaultClip;
+    const { info, clip, cast, recommendations, similar, reviews, imdbId, clipList } = movieWithDefaultClip;
 
     return (
         <Default
@@ -82,6 +82,9 @@ export const getServerSideProps = async ({ locale, query }) => {
 
     return {
         props: {
+            title: movie.info.title,
+            description: movie.info.overview,
+            image: movie.info.poster_path,
             movie,
             ...(await serverSideTranslations(locale)),
         },
