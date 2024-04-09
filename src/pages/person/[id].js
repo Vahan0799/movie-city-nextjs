@@ -44,9 +44,9 @@ export const getServerSideProps = async ({locale, query}) => {
 
 	return {
 		props: {
-			title: person.name,
-			description: person.overview,
-			image: person.profile_path,
+			title: person.details.name,
+			description: person.details.name,
+			image: person.details.profile_path,
 			person,
 			...(await serverSideTranslations(locale)),
 		},
