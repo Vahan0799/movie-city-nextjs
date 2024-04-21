@@ -6,7 +6,7 @@ import StarRatings from 'react-star-ratings/build/star-ratings';
 import NextLink from '@/components/UI/NextLink';
 import NextImage from '@/components/UI/next-image';
 import {IMAGE_PATH} from '@/constants';
-import {roundNumber, lowercaseString, formatDate} from '@/helpers/stringHelpers';
+import {roundNumber, lowercaseString, formatDate, extractYear} from '@/helpers/stringHelpers';
 import {fadeInVariants, floatUpVariants} from '@/helpers/moduleHelpers';
 import styles from './index.module.scss';
 
@@ -26,7 +26,7 @@ const Index = props => {
             <NextLink
                 className={styles.media}
                 href={`/media/${mediaType}/${media.id}-${lowercaseString(media?.original_title || media?.original_name)}`}
-                title={media?.title || media?.name}
+                title={`${media?.title} (${extractYear(media?.release_date)})` || `${media?.name} (${extractYear(media?.first_air_date)})`}
             >
                 <figure className="full-figure">
                     <motion.div
