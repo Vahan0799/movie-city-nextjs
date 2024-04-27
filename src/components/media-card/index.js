@@ -4,7 +4,7 @@ import {motion} from 'framer-motion';
 import {useTranslation} from 'next-i18next';
 import StarRatings from 'react-star-ratings/build/star-ratings';
 import NextLink from '@/components/UI/NextLink';
-import NextImage from '@/components/UI/next-image';
+import NextImage from '@/components/UI/NextImage';
 import {IMAGE_PATH} from '@/constants';
 import {roundNumber, lowercaseString, formatDate, extractYear} from '@/helpers/stringHelpers';
 import {fadeInVariants, floatUpVariants} from '@/helpers/moduleHelpers';

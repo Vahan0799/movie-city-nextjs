@@ -1,6 +1,6 @@
 import React from 'react';
 import {useTranslation} from 'next-i18next';
-import NextImage from '@/components/UI/next-image';
+import NextImage from '@/components/UI/NextImage';
 import NextLink from '@/components/UI/NextLink';
 import PrevArrow from '@/components/svg/prev-arrow';
 import {extractYear, lowercaseString} from '@/helpers/stringHelpers';

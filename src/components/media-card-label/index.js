@@ -3,7 +3,7 @@ import {useTranslation} from 'next-i18next';
 import {motion} from 'framer-motion';
 import classNames from 'classnames';
 import NextLink from '@/components/UI/NextLink';
-import NextImage from '@/components/UI/next-image';
+import NextImage from '@/components/UI/NextImage';
 import {IMAGE_PATH} from '@/constants';
 import {roundNumber, lowercaseString, formatDate} from '@/helpers/stringHelpers';
 import {fadeInVariants} from '@/helpers/moduleHelpers';

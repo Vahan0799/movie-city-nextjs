@@ -5,7 +5,7 @@ import {useRouter} from 'next/router';
 import {AnimatePresence, motion} from 'framer-motion';
 import Input from '@/components/UI/Input';
 import NextLink from '@/components/UI/NextLink';
-import NextImage from '@/components/UI/next-image';
+import NextImage from '@/components/UI/NextImage';
 import Button from '@/components/UI/Button';
 import {useCurrentLocale} from '@/hooks/useLocale';
 import {getSearchResults} from '@/services/global';

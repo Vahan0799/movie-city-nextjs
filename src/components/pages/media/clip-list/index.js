@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {Swiper, SwiperSlide} from 'swiper/react';
 import {Pagination} from 'swiper/modules';
-import NextImage from '@/components/UI/next-image';
+import NextImage from '@/components/UI/NextImage';
 import {dispatch} from '@/helpers';
 import {setClipKey, setShowClip} from '@/redux/slices/movieSlice';
 import {CLIP_THUMBNAIL} from '@/constants';

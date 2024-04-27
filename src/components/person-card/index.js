@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
-import NextImage from '@/components/UI/next-image';
+import NextImage from '@/components/UI/NextImage';
 import NextLink from '@/components/UI/NextLink';
 import {lowercaseString} from '@/helpers/stringHelpers';
 import {IMAGE_PATH} from '@/constants';

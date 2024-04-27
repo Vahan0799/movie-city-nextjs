@@ -3,7 +3,7 @@ import {useTranslation} from 'next-i18next';
 import classNames from 'classnames';
 import StarRatings from 'react-star-ratings/build/star-ratings';
 import Button from '@/components/UI/Button';
-import NextImage from '@/components/UI/next-image';
+import NextImage from '@/components/UI/NextImage';
 import {truncateText} from '@/helpers/stringHelpers';
 import {IMAGE_PATH} from '@/constants';
 import styles from './index.module.scss';

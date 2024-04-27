@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import classNames from 'classnames';
 import {useTranslation} from 'next-i18next';
 import StarRatings from 'react-star-ratings/build/star-ratings';
-import NextImage from '@/components/UI/next-image';
+import NextImage from '@/components/UI/NextImage';
 import NextLink from '@/components/UI/NextLink';
 import Button from '@/components/UI/Button';
 import {dispatch} from '@/helpers';

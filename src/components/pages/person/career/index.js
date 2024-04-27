@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import {useTranslation} from 'next-i18next';
 import SliderList from '@/components/slider-list';
 import NextLink from '@/components/UI/NextLink';
-import NextImage from '@/components/UI/next-image';
+import NextImage from '@/components/UI/NextImage';
 import {lowercaseString, truncateText, extractYear} from '@/helpers/stringHelpers';
 import {IMAGE_PATH, BACKDROP_PATH} from '@/constants';
 import styles from './index.module.scss';

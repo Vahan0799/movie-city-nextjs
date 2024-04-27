@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
-import NextImage from '@/components/UI/next-image';
+import NextImage from '@/components/UI/NextImage';
 import styles from './index.module.scss';
 
 const Skeleton = () => {
