@@ -3,10 +3,12 @@
         @apply absolute top-[28px] left-[16px]
         lg:static;
     }
+
     &Button {
-        @apply relative bg-primary-blue transition-colors duration-300 w-[60px] h-[30px] rounded-[200px] inline-block
-        before:bg-[url('../../assets/svg/sun.svg')] before:left-[5px]
-        after:bg-[url('../../assets/svg/moon.svg')] after:right-[5px];
+        @apply relative bg-primary-blue transition-colors duration-300
+        w-[60px] h-[30px] rounded-[200px] inline-block outline outline-1 outline-primary-pink
+        before:bg-[url('../../../assets/svg/sun.svg')] before:left-[5px]
+        after:bg-[url('../../../assets/svg/moon.svg')] after:right-[5px];
         box-shadow: inset 0px 5px 15px rgba(0, 0, 0, 0.4), inset 0px -5px 15px rgba(255, 255, 255, 0.4);
 
         &::before, &::after {

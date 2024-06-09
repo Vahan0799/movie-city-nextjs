@@ -26,7 +26,7 @@ const Index = props => {
             <NextLink
                 className={styles.media}
                 href={`/media/${mediaType}/${media.id}-${lowercaseString(media?.original_title || media?.original_name)}`}
-                title={`${media?.title} (${extractYear(media?.release_date)})` || `${media?.name} (${extractYear(media?.first_air_date)})`}
+                title={`${media?.title || media?.name} (${extractYear(media?.release_date || media?.first_air_date)})`}
             >
                 <figure className="full-figure">
                     <motion.div
@@ -44,7 +44,7 @@ const Index = props => {
                             <NextImage
                                 className="transition-transform duration-500"
                                 src={IMAGE_PATH(media.poster_path)}
-                                width={300} height={450} alt={`Title - ${media?.title || media?.name}`}
+                                width={300} height={450} alt={media?.title || media?.name}
                             />
                         </div>
                         {detailed &&
@@ -83,7 +83,9 @@ const Index = props => {
                                 />
                             </div>
                         }
-                        <p className={styles.mediaTitle}>{media?.title || media?.name}</p>
+                        <p className={classNames([styles.mediaTitle, 'text-twoline'])}>
+                            {media?.title || media?.name}
+                        </p>
                     </motion.figcaption>
                 </figure>
             </NextLink>

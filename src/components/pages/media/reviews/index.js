@@ -37,7 +37,7 @@ const Index = props => {
 							<div className={styles.reviewAuthor}>
 								<NextImage
 									src={IMAGE_PATH(review.author_details.avatar_path)}
-									alt={'avatar'}
+									alt={review.author_details.username}
 									width={70}
 									height={70}
 									className={styles.reviewAuthorAvatar}

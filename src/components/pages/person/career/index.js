@@ -84,7 +84,7 @@ const Index = props => {
                                         >
                                             <NextImage
                                                 src={IMAGE_PATH(media.poster_path)}
-                                                alt={`Title: ${media.title || media.name}`}
+                                                alt={media.title || media.name}
                                             />
                                             <div className={styles.careerListDescription}>
                                                 {(media.release_date || media.first_air_date) &&

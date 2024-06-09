@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import NextLink from '@/components/UI/NextLink';
 import NextImage from '@/components/UI/NextImage';
 import {IMAGE_PATH} from '@/constants';
-import {roundNumber, lowercaseString, formatDate} from '@/helpers/stringHelpers';
+import {roundNumber, lowercaseString, formatDate, extractYear} from '@/helpers/stringHelpers';
 import {fadeInVariants} from '@/helpers/moduleHelpers';
 import styles from './index.module.scss';
 
@@ -29,12 +29,13 @@ const Index = props => {
         >
             <NextLink
                 href={`/media/${mediaType}/${media.id}-${lowercaseString(media?.original_title || media?.original_name)}`}
+                title={`${media?.title || media?.name} (${extractYear(media?.release_date || media?.first_air_date)})`}
                 className={classNames([styles.mediaCardLabel, 'card-label-hover'])}
             >
                 <div className={styles.mediaCardImage}>
                     <NextImage
                         src={IMAGE_PATH(media.poster_path)}
-                        alt={`Title: ${media?.title || media?.name}`}
+                        alt={media?.title || media?.name}
                     />
                 </div>
                 <div className={styles.mediaCardDetails}>

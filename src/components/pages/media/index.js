@@ -58,7 +58,7 @@ const Index = props => {
 				<div className="flex flex-col gap-2.5">
 					<NextImage
 						src={`https://image.tmdb.org/t/p/w500/${data.poster_path}`}
-						alt={`Title: ${data.title || data.name}`}
+						alt={data.title || data.name}
 						width={500}
 						height={750}
 						priority

@@ -18,12 +18,13 @@ export default Home;
 
 export const getStaticProps = async ({ locale }) => {
     const translations = await serverSideTranslations(locale, ['common', 'homePage']);
+    const title = locale === 'ru' ? 'Movie City | Главная Страница' : 'Movie City | Home'
     const description = locale === 'ru' ? 'Присоединяйтесь к нам и зовите друзей, чтобы вместе с MovieCity смотреть фильмы онлайн бесплатно в HD!'
         : 'Join us and invite your friends to watch movies online for free in HD with MovieCity!'
 
     return {
         props: {
-            title: 'Movie City',
+            title,
             description,
             staticImage: '/movie-city.svg',
             ...translations

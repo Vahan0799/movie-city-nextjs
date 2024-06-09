@@ -23,7 +23,7 @@ const Index = props => {
 						src={IMAGE_PATH(media.poster_path)}
 						width={150}
 						height={220}
-						alt={`Poster - ${media?.original_title || media?.original_name}`}
+						alt={media?.original_title || media?.original_name}
 					/>
 				</NextLink>
 				{(media.title || media.name) &&

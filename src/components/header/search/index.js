@@ -119,7 +119,9 @@ const Index = () => {
                                             >
                                                 <NextLink
                                                     className={styles.searchResult}
-                                                    href={`/media/${result.media_type}/${result.id}-${lowercaseString(result.original_title)}`}>
+                                                    href={`/media/${result.media_type}/${result.id}-${lowercaseString(result.original_title || result.original_name)}`}
+                                                    title={`${result.title || result.name} (${extractYear(result.release_date || result.first_air_date)})`}
+                                                >
                                                     <NextImage
                                                         wrapperClass="!w-[16%]"
                                                         src={IMAGE_PATH(result.poster_path)} width={45} height={68}

@@ -76,11 +76,22 @@
     }
 }
 
-.text-oneline {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 1;
-    overflow: hidden;
+.text {
+    &-truncate {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    &-oneline {
+        @extend .text-truncate;
+        -webkit-line-clamp: 1;
+    }
+
+    &-twoline {
+        @extend .text-truncate;
+        -webkit-line-clamp: 2;
+    }
 }
 
 .full-figure {
