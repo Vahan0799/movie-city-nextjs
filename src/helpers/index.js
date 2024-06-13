@@ -1,5 +1,6 @@
 import store from '@/redux/store';
 import {BACKDROP_PATH} from '@/constants';
+import {extractYear, lowercaseString} from '@/helpers/stringHelpers';
 
 export const dispatch = action => store.dispatch(action);
 
@@ -41,3 +42,15 @@ export const filterFetchResults = media => {
         )
     }
 };
+
+export const mediaURL = (type, media) => {
+    if (type && media) {
+        return `/media/${type}/${media.id}-${lowercaseString(media?.original_title || media?.original_name)}`
+    }
+};
+
+export const mediaTitle = media => {
+    if (media) {
+        return `${media?.title || media?.name} (${extractYear(media?.release_date || media?.first_air_date)})`
+    }
+}
